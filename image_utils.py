@@ -62,7 +62,7 @@ def plot_images(images, labels, classes, normalize=True):
 import scipy.ndimage as ndimage
 
 
-def plot_ae_outputs_den(my_model, my_loader, n=1):
+def plot_ae_outputs_den(my_model, my_loader, device, n=1):
     plt.figure(figsize=(10, 20))
     my_model.eval()
     for i in range(n):
