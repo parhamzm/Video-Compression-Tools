@@ -62,18 +62,17 @@ def plot_images(images, labels, classes, normalize=True):
 import scipy.ndimage as ndimage
 
 
-def plot_ae_outputs_den(n=1):
+def plot_ae_outputs_den(my_model, my_loader, n=1):
     plt.figure(figsize=(10, 20))
-    u_net.eval()
+    my_model.eval()
     for i in range(n):
         ax = plt.subplot(5, n, i+1)
-        org_img1, org_img2 = next(iter(test_loader)) #test_raw_dataset[i][0].unsqueeze(0)
-        org_img = org_img2[i].to(device)
-        image_noisy1, image_noisy2 = next(iter(test_loader)) #test_decoded_dataset[i][0].unsqueeze(0) # add_noise(img,noise_factor)     
-        image_noisy = image_noisy1.to(device)[i]
+        image_noisy, org_img = next(iter(my_loader)) #test_raw_dataset[i][0].unsqueeze(0)
+        org_img = org_img[i].to(device)
+        image_noisy = image_noisy[i].to(device)
         with torch.no_grad():
-            image_noisy1 = image_noisy.view(1, 3, 360, 640).to(device)
-            residual_img = u_net(image_noisy1)
+            image_noisy = image_noisy.to(device)
+            residual_img = my_model(image_noisy.view(1, 3, 360, 640))
 
         # new_data = ndimage.rotate(img.cpu().squeeze().numpy().T, angle, reshape=True)
         # ax.imshow((org_img.detach().permute(1, 2, 0).cpu().numpy() * 255).astype(np.uint8));
