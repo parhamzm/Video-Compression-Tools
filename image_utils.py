@@ -55,10 +55,6 @@ def plot_images(images, labels, classes, normalize=True):
 #     ax = fig.add_subplot(8, 4, idx + 1, xticks=[], yticks=[]) # 2 rows & 10 columns!
 #     plt.imshow(img_convert(images[idx]).squeeze(), cmap=plt.get_cmap('gray'))
 #     ax.set_title("Class : " + str(labels[idx].item()), size=15)
-
-
-
-
 import scipy.ndimage as ndimage
 
 
